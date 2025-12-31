@@ -19,7 +19,7 @@ export default function Collaborate() {
       <h1 className="text-[48px] font-[700] leading-[48px] text-black text-center ">{data.title}</h1>
       <div className="flex  gap-[30px] mt-[30px]">
         {data.services.map((item:ColabrateItems,index:number)=>(
-                  <div className="flex flex-col gap-[10px]">
+                  <div key={index} className="flex flex-col gap-[10px]">
           <h3 className="text-[24px] text-black font-[700]">{item.title}</h3>
           <p className="text-[18px] text-[#05003899]">
             {item.description}

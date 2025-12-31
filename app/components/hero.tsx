@@ -33,7 +33,7 @@ export default async function hero() {
           </div>
           <div className="flex gap-[10px]">
             {data.statistics.images.map((image:any,index:number)=>(
-              <img className="w-auto h-[40px]" src={blob+image.img.filename} alt="" />
+              <img key={index} className="w-auto h-[40px]" src={blob+image.img.filename} alt="" />
             ))}
           </div>
         </div>

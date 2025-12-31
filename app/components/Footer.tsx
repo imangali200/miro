@@ -1,4 +1,4 @@
-
+'use client';
 export default function Footer() {
     return (
         <footer className="bg-[#050038] text-white p-10 font-sans">

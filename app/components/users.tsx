@@ -12,7 +12,7 @@ export default async function Users(){
             <h3 className="text-[#05003899]">{data.title}</h3>
             <div className="flex items-center w-full justify-between mt-[40px]">
                 {data.images.map((image:any,index:number)=>(
-                    <img className=" h-[50px]" src={blob+image.image.filename} alt="" />
+                    <img key={index} className=" h-[50px]" src={blob+image.image.filename} alt="" />
                 ))}
                 
             </div>
