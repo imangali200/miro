@@ -7,6 +7,7 @@ type statisticaProps = {
 }
 
 export default function Statistica({items}:statisticaProps) {
+  
   return (
     <div className="bg-[#FFD02F] w-full flex flex-col items-center text-black py-[60px]">
       <h1 className="text-[40px] leading-[45px] text-center font-[700]">Why companies large <br/> and small trust Miro</h1>

@@ -1,13 +1,20 @@
-export default function Users(){
+export default async function Users(){
+
+     const blob = process.env.BLOB_URL;
+  const url = process.env.BASE_URL;
+  const res = await fetch(
+    `${url}/api/companies/1?depth=2&draft=false&locale=undefined&trash=false`
+  );
+  const data = await res.json();
+  console.log(data);
     return(
         <div className="flex flex-col items-center justify-center mt-[50px]">
-            <h3 className="text-[#05003899]">Trusted by 45M+ users</h3>
+            <h3 className="text-[#05003899]">{data.title}</h3>
             <div className="flex items-center w-full justify-between mt-[40px]">
-                <img className="w-[117px] h-auto" src="/walmart.png" alt="" />
-                <img className="w-[224px] h-auto" src="/cisco.png" alt="" />
-                <img className="w-[53px] h-auto" src="/volvo.png" alt="" />
-                <img className="w-[224px] h-auto" src="/deloitte.png" alt="" />
-                <img className="w-[73px] h-auto" src="/akta.png" alt="" />
+                {data.images.map((image:any,index:number)=>(
+                    <img className=" h-[50px]" src={blob+image.image.filename} alt="" />
+                ))}
+                
             </div>
         </div>
     )

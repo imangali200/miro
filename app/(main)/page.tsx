@@ -7,23 +7,6 @@ import Statistica from "../components/statistica";
 import Stories from "../components/Stories";
 import CurrentUsers from "../components/CurrentUsers";
 
-const collaborateItems = [
-  {
-    title: "Free forever",
-    description:
-      "Our free plan gives you unlimited team members, 3 boards, and 300+ expert-made templates. Signing up with your work email lets you bring in your team faster. See our pricing plans for more features",
-  },
-  {
-    title: "Easy integrations",
-    description:
-      "Miro has 100+ powerful integrations with tools you already use like G Suite, Slack, and Jira, so your workflow is seamless. View the full list in our Marketplace.",
-  },
-  {
-    title: "Security first",
-    description:
-      "We treat your data like you would — with the utmost care. We follow industry-leading security standards and give you tools to protect intellectual property. Learn more at our Trust Center.",
-  },
-];
 
 const builtItems = {
   title: "Built for the way you work",
@@ -112,25 +95,32 @@ const storiesData = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+
+  const blob = process.env.BLOB_URL;
+  const url = process.env.BASE_URL;
+  const res = await fetch(
+    `${url}/api/informations`
+  );
+  const data = await res.json();
+  console.log(data)
+
   return (
     <div className="flex  flex-col w-full items-center min-h-screen py-4  bg-white font-sans">
       <div className="w-[1200px] px-[45px]">
         <Hero />
         <Users />
-        <Collaborate items={collaborateItems} />
-        <Info
-          title="Work together, wherever you work"
-          description="In the office, remote, or a mix of the two, with Miro, your team can connect, collaborate, and co-create in one space no matter where you are."
-          imgsrc="/image copy 2.png"
-          className="flex"
+        <Collaborate/>
+        {data && data.docs.map((item:any,index:number)=>(
+          <Info
+          key={index}
+          title={item.title}
+          description={item.description}
+          imgsrc={blob+item.img.filename}
+          className={`flex ${item.isImageRight === true ? 'flex-row' : 'flex-row-reverse'}`}
         />
-        <Info
-          title="Connect your tools,close your tabs"
-          description="Whether you want to edit your Google Docs, resolve Jira issues, or collaborate over Zoom, Miro has 100+ integrations with tools you already use and love."
-          imgsrc="/image copy 3.png"
-          className="flex flex-row-reverse"
-        />
+        ))}
+        
         <Built item={builtItems} />
         <Built item={builtItemKins} />
       </div>
