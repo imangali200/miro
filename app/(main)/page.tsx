@@ -1,3 +1,4 @@
+"use client";
 import Hero from "../components/hero";
 import Users from "../components/users";
 import Collaborate from "../components/Colabrate";
@@ -6,7 +7,7 @@ import Built from "../components/Built";
 import Statistica from "../components/statistica";
 import Stories from "../components/Stories";
 import CurrentUsers from "../components/CurrentUsers";
-
+import { useEffect, useState } from "react";
 
 const builtItems = {
   title: "Built for the way you work",
@@ -75,52 +76,64 @@ const storiesData = [
   {
     title: "vmware",
     description: `“When the pandemic hit, those of us who thrive on in-person collaboration were worried that our creativity and productivity would suffer. Miro was the perfect tool to help us with collaboration, whiteboarding, and retrospectives while remote.”`,
-    avatar:"image copy 6.png",
-    name:"Roxanne Mustafa",
-    profesion:"Design Team Lead at VMware"
+    avatar: "image copy 6.png",
+    name: "Roxanne Mustafa",
+    profesion: "Design Team Lead at VMware",
   },
   {
     title: "DocuSign",
     description: `“Miro helps solve one of the major gaps in product design: how to manage tasks across product designers whose projects are in different tools.”`,
-    avatar:"image copy 7.png",
-    name:"Jane Ashley",
-    profesion:"Head of Design at DocuSign"
+    avatar: "image copy 7.png",
+    name: "Jane Ashley",
+    profesion: "Head of Design at DocuSign",
   },
   {
     title: "frog",
     description: `“As we used Miro we moved from skepticism to belief to innovation, and now we have a tool that’s at the core of what we do and will continue to extend into the future.”`,
-    avatar:"image copy 8.png",
-    name:"Laura Baird",
-    profesion:"Associate Design Director at frog"
+    avatar: "image copy 8.png",
+    name: "Laura Baird",
+    profesion: "Associate Design Director at frog",
   },
-];
+  ];
 
-export default async function Home() {
+export default function Home() {
+  const [data, setData] = useState<any>(null);
 
-  const blob = process.env.BLOB_URL;
-  const url = process.env.BASE_URL;
-  const res = await fetch(
-    `${url}/api/informations`
-  );
-  const data = await res.json();
-  console.log(data)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/informations`);
+        const json = await res.json();
+        console.log(json);
+        setData(json);
+      } catch (error) {
+        console.error("Error fetching home data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const blob = process.env.NEXT_PUBLIC_BLOB_URL;
 
   return (
     <div className="flex  flex-col w-full items-center min-h-screen py-4  bg-white font-sans">
       <div className="w-[1200px] px-[45px]">
         <Hero />
         <Users />
-        <Collaborate/>
-        {data && data.docs.map((item:any,index:number)=>(
-          <Info
-          key={index}
-          title={item.title}
-          description={item.description}
-          imgsrc={blob+item.img.filename}
-          className={`flex ${item.isImageRight === true ? 'flex-row' : 'flex-row-reverse'}`}
-        />
-        ))}
-        
+        <Collaborate />
+        {data &&
+          data.docs.map((item: any, index: number) => (
+            <Info
+              key={index}
+              title={item.title}
+              description={item.description}
+              imgsrc={blob + item.img.filename}
+              className={`flex ${
+                item.isImageRight === true ? "flex-row" : "flex-row-reverse"
+              }`}
+            />
+          ))}
+
         <Built item={builtItems} />
         <Built item={builtItemKins} />
       </div>
