@@ -24,7 +24,7 @@ export default function Hero() {
 
   if (!data) return null;
 
-  const blob = process.env.NEXT_PUBLIC_BLOB_URL;
+  const blob = process.env.BLOB_URL;
 
   return (
     <div className="text-black flex justify-center gap-[30px] mt-[40px]">
