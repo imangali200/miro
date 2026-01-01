@@ -7,8 +7,9 @@ export default function Users() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const url = process.env.NEXT_PUBLIC_BASE_URL;
         const res = await fetch(
-          `/api/companies/1?depth=2&draft=false&locale=undefined&trash=false`
+          `${url}/api/companies/1?depth=2&draft=false&locale=undefined&trash=false`
         );
         const json = await res.json();
         console.log(json);

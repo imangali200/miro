@@ -102,7 +102,8 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`/api/informations`);
+        const url = process.env.NEXT_PUBLIC_BASE_URL;
+        const res = await fetch(`${url}/api/informations`);
         const json = await res.json();
         console.log(json);
         setData(json);
