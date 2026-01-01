@@ -114,7 +114,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const blob = process.env.NEXT_PUBLIC_BLOB_URL;
+  const blob = process.env.BLOB_URL;
 
   return (
     <div className="flex  flex-col w-full items-center min-h-screen py-4  bg-white font-sans">

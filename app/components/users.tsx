@@ -23,7 +23,7 @@ export default function Users() {
 
   if (!data) return null;
 
-  const blob = process.env.NEXT_PUBLIC_BLOB_URL;
+  const blob = process.env.BLOB_URL;
 
   return (
     <div className="flex flex-col items-center justify-center mt-[50px]">

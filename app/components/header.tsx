@@ -29,7 +29,7 @@ export default function Header() {
   }, []);
 
   if (!data) return null; 
-  const blob = process.env.NEXT_PUBLIC_BLOB_URL;
+  const blob = process.env.BLOB_URL;
 
   return (
     <header className="flex justify-between items-center bg-white text-black border-b-[1px] border-gray-200 py-4 px-6 ">
